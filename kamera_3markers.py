@@ -30,7 +30,7 @@ HTML_OLDAL = """
         let currentObjectUrl = null;
         
         ws.onopen = function() {
-            statusText.innerText = '✅ Kamera üzemel';
+            statusText.innerText = 'Kamera üzemel';
             statusText.style.color = '#00ffcc';
         };
         
@@ -43,7 +43,7 @@ HTML_OLDAL = """
         };
         
         ws.onerror = function() {
-            statusText.innerText = '❌ Hiba a kapcsolatban!';
+            statusText.innerText = 'Hiba a kapcsolatban!';
             statusText.style.color = 'red';
         };
     </script>
