@@ -1,4 +1,4 @@
-# `kamera_siemens.py` konfigurációs magyarázata
+# `kamera_siemens.py` leírás
 
 Ez a dokumentum a [`kamera_siemens.py`] beállítható értékeit
 és a Siemens felé küldött adatok működését foglalja össze.
