@@ -11,7 +11,7 @@ A Raspberry Pi 4 based computer vision and simulation bridge. It tracks physical
 ## Documentation
 For detailed information, please refer to the following documents:
 * **[User Guide (PDF)](link-to-your-pdf-file.pdf):** Step-by-step instructions for physical setup and everyday usage.
-* **[Architecture & Logic (CAMERA_CONFIG.md)](CAMERA_CONFIG.md):** Deep dive into the Python source code and CV pipeline.
+* **[Architecture & Logic (CAMERA_CONFIG.md)](docs/CAMERA_CONFIG.md):** Deep dive into the Python source code and CV pipeline.
 
 ## Development Workflow (For Future Students)
 
