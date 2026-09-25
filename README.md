@@ -21,7 +21,7 @@ If you need to improve or fix the code, follow this workflow:
 
 1. Clone this repository to your **own computer** (using VS Code, Zed, etc.).
 2. Make your modifications locally, then commit and push to GitHub.
-3. Open a terminal on the **Raspberry Pi** and pull your latest changes:
+3. Open a terminal on the **Raspberry Pi** (ssh works also) and pull your latest changes:
    ```bash
    cd /home/tk/Desktop/plantsim
    git pull
