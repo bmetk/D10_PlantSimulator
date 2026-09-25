@@ -7,7 +7,7 @@ Ez a dokumentum a [`kamera_siemens.py`] beállítható értékeit
 
 A program Raspberry Pi kameráról olvas MJPEG videófolyamot, OpenCV-vel
 ArUco markereket és a markerek által kijelölt területen gépeket keres, majd
-egy böngészős kezelőfelületen megjeleníti a képet. A Siemens PLC TCP-kapcsolaton
+egy böngészős kezelőfelületen megjeleníti a képet. A Siemens PC TCP-kapcsolaton
 keresztül kapja meg a gépek aktuális állapotát.
 
 Szükséges főbb összetevők:
@@ -17,7 +17,7 @@ Szükséges főbb összetevők:
 - `numpy`
 - `aiohttp`
 - Raspberry Pi kamera és a `rpicam-vid` parancs
-- hálózati kapcsolat a Siemens PLC felé
+- hálózati kapcsolat a Siemens PC felé
 
 ## Python-konstansok
 
@@ -38,8 +38,8 @@ képezi le:
 - `SIEMENS_MAX_Y`: maximális Y-koordináta
 
 Az értékek nem a kamera felbontását jelentik. A kamera képén mért koordináták
-arányosan, 0 és a megadott maximum között kerülnek elküldésre. Ha a PLC-ben
-más munkaterületet használunk, ezt a két értéket kell a PLC elvárt
+arányosan, 0 és a megadott maximum között kerülnek elküldésre. Ha a PC-ben
+más munkaterületet használunk, ezt a két értéket kell a PC elvárt
 koordinátatartományához igazítani.
 
 ### `TCP_SZERVER_PORT`
@@ -48,9 +48,9 @@ koordinátatartományához igazítani.
 TCP_SZERVER_PORT = 27015
 ```
 
-Ezen a TCP-porton várja a program a Siemens PLC csatlakozását. A portot a
+Ezen a TCP-porton várja a program a Siemens PC csatlakozását. A portot a
 tűzfalon és a hálózati konfigurációban is engedélyezni kell. Ha módosítjuk,
-a PLC oldali kliens portbeállítását is módosítani kell.
+a PC oldali kliens portbeállítását is módosítani kell.
 
 ### `MAX_MISSING_FRAMES`
 
@@ -138,7 +138,7 @@ Induláskor mind a hat gép alapértéke `rot=1`, `x=0`, `y=0`.
 
 ## Siemens TCP-adatformátum
 
-A PLC felé küldött sor egy fejlécből, majd a hat gép három értékéből áll:
+A PC felé küldött sor egy fejlécből, majd a hat gép három értékéből áll:
 
 ```text
 1,rot0,x0,y0,rot1,x1,y1,rot2,x2,y2,rot3,x3,y3,rot4,x4,y4,rot5,x5,y5
@@ -181,7 +181,7 @@ határozza meg. A webes felület funkciói:
 
 A felület Siemens hostként jelenleg a `172.22.30.1` címet írja ki. Ez
 tájékoztató szöveg a HTML-ben; a Python TCP-szervere minden hálózati
-interfészen (`0.0.0.0`) figyel, ezért a tényleges elérhetőséget a PLC és a
+interfészen (`0.0.0.0`) figyel, ezért a tényleges elérhetőséget a PC és a
 Raspberry Pi hálózati beállítása határozza meg.
 
 ## Módosítási útmutató
@@ -191,12 +191,12 @@ Tipikus módosítások:
 | Cél                                    | Módosítandó érték                                     |
 | ---------------------------------------| ----------------------------------------------------- |
 | Siemens koordinátatartomány módosítása | `SIEMENS_MAX_X`, `SIEMENS_MAX_Y`                      |
-| PLC TCP-port módosítása                | `TCP_SZERVER_PORT` és a PLC kliensbeállítása          |
+| PC TCP-port módosítása                | `TCP_SZERVER_PORT` és a PC kliensbeállítása          |
 | Marker eltűnésének tolerálása          | `MAX_MISSING_FRAMES`                                  |
 | Kamera felbontása vagy sebessége       | `kamera_hatterszal()` `rpicam-vid` parancsa           |
 | Webes felület portja                   | `web.run_app(..., port=5002)`                         |
 | Küldés indító markerének módosítása    | `kamera_hatterszal()` `42 in ids.flatten()` feltétele |
 
 Módosítás után indítsuk újra a programot, ellenőrizzük a webes felületet,
-majd a `/api/dominoes` végponton és a PLC oldali TCP-kapcsolaton is
+majd a `/api/dominoes` végponton és a PC oldali TCP-kapcsolaton is
 ellenőrizzük a ténylegesen küldött értékeket.
